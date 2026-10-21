@@ -272,6 +272,42 @@ a:focus-visible {
   font-weight: 600;
 }
 
+/* Typewriter (typewriter.js): untyped letters keep their space, so nothing reflows. */
+.typewriter__char {
+  visibility: hidden;
+}
+
+.typewriter__char.is-shown {
+  visibility: visible;
+}
+
+/* Zero-size anchor on the baseline, so moving it never changes line heights. */
+.typewriter__caret {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 0;
+}
+
+.typewriter__caret::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -0.9em;
+  width: 2px;
+  height: 1.22em;   /* 17.1px on 14px text, as in Figma */
+  background: currentColor;
+  animation: caret-blink 1.1s steps(1, end) infinite;
+}
+
+.typewriter.is-typing .typewriter__caret::before {
+  animation: none;   /* solid while typing, blinks when idle */
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -287,21 +323,23 @@ a:focus-visible {
   line-height: 1.45;
   letter-spacing: var(--tracking-sm);
   white-space: nowrap;
-  transition: opacity 150ms ease;
+  transition: transform 200ms ease-out;
 }
 
+/* Figma Sites hover: the button shrinks to 98% from its centre. */
 .button:hover {
-  opacity: 0.82;
+  transform: scale(0.98);
   text-decoration: none;
 }
 
+/* WIP isn't clickable, so it doesn't react to hover. */
 .button--disabled {
   background: var(--color-button-disabled);
   cursor: default;
 }
 
 .button--disabled:hover {
-  opacity: 1;
+  transform: none;
 }
 
 .project__media {
