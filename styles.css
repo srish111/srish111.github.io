@@ -176,25 +176,14 @@ a:focus-visible {
   height: auto;
 }
 
-.hero__avatar {
-  position: relative;
+.hero__photo {
   flex: none;
-  width: 134.153px;
-  height: 90px;
+  width: 156.061px;
+  height: 139.483px;
   margin-left: auto;
-}
-
-.hero__avatar-card {
-  width: 134.153px;
-  height: 90px;
-}
-
-.hero__avatar-portrait {
-  position: absolute;
-  left: 31.694px;   /* centred horizontally */
-  bottom: 0;        /* sits on the card's bottom edge */
-  width: 70.765px;
-  height: 76.928px;
+  border-radius: var(--radius-media);
+  object-fit: cover;
+  transform: scaleX(-1);   /* mirrored, as in Figma: the plant sits on the side facing the title */
 }
 
 /* ---------- Projects (Figma 53:4417 – 53:4520) ---------- */
