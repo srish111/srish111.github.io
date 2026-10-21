@@ -1,0 +1,535 @@
+/* Tokens taken from the Figma file (Page 1 › Desktop, 1280px frame). */
+:root {
+  color-scheme: light;
+
+  --color-bg: #fff;
+  --color-ink: #000;
+  --color-muted: #939393;
+  --color-sage: #6d9145;
+  --color-plum: #6f448c;
+  --color-lime: #8cac3a;
+  --color-button-disabled: rgba(0, 0, 0, 0.25);
+  --shadow-media: 0 0 3.3px rgba(0, 0, 0, 0.25);
+  --color-block-ink: #050506;
+  --color-block-mint: #7cfbe3;
+  --color-block-sky: #dfeeff;
+
+  --font-sans: "Familjen Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-sm: 14px;
+  --text-md: 20px;
+  --leading-tight: 0.94;
+  --leading-list: 18.1px;   /* 14px rows in the design sit 18.1px apart */
+  --tracking-sm: -0.07px;
+  --tracking-body: -0.14px;
+  --tracking-md: -0.1px;
+
+  --page-padding: 60px;   /* Figma frame: 60px on every side */
+  --space-related: 24px;   /* inside a group: heading → its paragraph */
+  --space-group: 32px;     /* between groups: text → call to action */
+  --radius-button: 12px;
+  --radius-media: 15px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-sm);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, p, ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-plum);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.is-muted { color: var(--color-muted); }
+
+.page {
+  padding: var(--page-padding);
+}
+
+/* ---------- Site header (Figma 53:3513) ---------- */
+
+.site-header {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 300.635fr)
+    minmax(0, 422.635fr)
+    minmax(0, 366.634fr)
+    minmax(0, 70.096fr);
+  align-items: start;
+  min-height: 106px;
+  padding-bottom: 5px;
+}
+
+.site-header__repo {
+  line-height: 0.96;
+}
+
+.site-header__identity {
+  font-size: var(--text-md);
+  line-height: 19px;
+  letter-spacing: var(--tracking-md);
+}
+
+.site-header__role {
+  margin-top: 19px;
+}
+
+.site-header__status,
+.site-header__links {
+  line-height: var(--leading-list);
+}
+
+.site-header__current {
+  color: var(--color-sage);
+  font-weight: 500;
+}
+
+.site-header__education {
+  margin-top: var(--leading-list);
+}
+
+.site-header__links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------- Hero (Figma 53:3520) ---------- */
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  padding-top: clamp(56px, 12.34vw, 158px);
+  padding-bottom: clamp(40px, 8.125vw, 104px);
+}
+
+.hero__title {
+  font-size: clamp(46px, 9.375vw, 120px);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.00983em;   /* -1.18px at 120px */
+}
+
+.hero__last {
+  position: relative;
+  display: block;
+  font-size: 0.98333em;          /* last line is 118px in the design */
+  white-space: pre;
+}
+
+.hero__eye {
+  position: absolute;
+  left: 0.1288em;
+  top: 0.2322em;
+  width: 0.7628em;
+  height: auto;
+}
+
+.hero__avatar {
+  position: relative;
+  flex: none;
+  width: 134.153px;
+  height: 90px;
+  margin-left: auto;
+}
+
+.hero__avatar-card {
+  width: 134.153px;
+  height: 90px;
+}
+
+.hero__avatar-portrait {
+  position: absolute;
+  left: 31.694px;   /* centred horizontally */
+  bottom: 0;        /* sits on the card's bottom edge */
+  width: 70.765px;
+  height: 76.928px;
+}
+
+/* ---------- Projects (Figma 53:4417 – 53:4520) ---------- */
+
+.project__header {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 299.888fr)
+    minmax(0, 437.888fr)
+    minmax(0, 365.888fr)
+    minmax(0, 56.336fr);
+  align-items: start;
+  min-height: 110px;
+  padding-top: 15px;   /* 16px from the divider, which sits inside the box */
+  border-top: 1px solid var(--color-ink);
+}
+
+.project__name {
+  font-weight: 500;
+}
+
+.project__codename {
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.project__kind {
+  line-height: 18px;
+}
+
+.project__title {
+  max-width: 395.451px;
+  color: var(--color-plum);
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-md);
+}
+
+.project__meta {
+  font-weight: 500;
+  line-height: var(--leading-list);
+}
+
+.project__status {
+  color: var(--color-lime);
+  font-weight: 600;
+}
+
+.project__body {
+  display: grid;
+  grid-template-columns: 307px minmax(0, 1fr);
+  column-gap: 68.287px;
+  align-items: start;   /* text starts at the image's top edge */
+  padding-bottom: 48px;
+}
+
+.project__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-group);
+}
+
+.project__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-related);
+  width: 278px;
+  max-width: 100%;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-body);
+}
+
+.project__lede {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 226px;
+  height: 36px;
+  border-radius: var(--radius-button);
+  background: var(--color-ink);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: var(--tracking-sm);
+  white-space: nowrap;
+  transition: opacity 150ms ease;
+}
+
+.button:hover {
+  opacity: 0.82;
+  text-decoration: none;
+}
+
+.button--disabled {
+  background: var(--color-button-disabled);
+  cursor: default;
+}
+
+.button--disabled:hover {
+  opacity: 1;
+}
+
+.project__media {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 784.713 / 333.106;
+  border-radius: var(--radius-media);
+  box-shadow: var(--shadow-media);
+}
+
+.project__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project__media--ridebuddy { aspect-ratio: 783.97 / 344.642; }
+.project__media--ridebuddy img { object-position: 50% 59%; }
+.project__media--darkstores { aspect-ratio: 784.5 / 333.5; }
+.project__media--bnpl img { object-position: 50% 57.3%; }
+.project__media--inbetween img { object-position: 50% 24.6%; }
+
+/* Positions are the Figma values on the 784.713 × 333.106 image, scaled with it. */
+.media-block {
+  position: absolute;
+  left: calc(var(--x) / 784.713 * 100%);
+  top: calc(var(--y) / 333.106 * 100%);
+  width: calc(var(--w) / 784.713 * 100%);
+  height: calc(var(--h) / 333.106 * 100%);
+  border-radius: 2px;
+}
+
+.media-block--ink { background: var(--color-block-ink); }
+.media-block--mint { background: var(--color-block-mint); }
+.media-block--sky { background: var(--color-block-sky); }
+
+/* ---------- Footer (Figma 61:10482) ---------- */
+
+.site-footer {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 367.888fr)
+    minmax(0, 367.888fr)
+    minmax(0, 367.888fr)
+    minmax(0, 56.336fr);
+  align-items: start;
+  padding-top: 15px;
+  border-top: 1px solid var(--color-ink);
+  font-weight: 500;
+  line-height: var(--leading-list);
+}
+
+.site-footer__link {
+  grid-column: 4;
+  justify-self: end;
+  white-space: nowrap;
+}
+
+/* ---------- Case-study pages (Figma: Last Mile Inside, BNPLBehavior, Inbetween) ---------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.cs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 57px;
+  border-top: 1px solid var(--color-ink);
+  font-weight: 500;
+  line-height: var(--leading-list);
+}
+
+.cs-header__back {
+  white-space: nowrap;
+}
+
+.cs-slides img {
+  width: 100%;
+  height: auto;
+}
+
+.cs-footer {
+  margin-top: 16px;
+}
+
+/* Live boards (Miro, FigJam) sit in the slide column at 16:9, like the slides. */
+.cs-embed {
+  aspect-ratio: 16 / 9;
+  background: #f4f4f2;
+}
+
+.cs-embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Slides built from Figma layers. --u is 1/1160 of the slide width, so every
+   size inside scales with the slide just like the image slices around it. */
+.slide {
+  --u: calc(100cqw / 1160);
+  position: relative;
+  overflow: hidden;
+  container-type: inline-size;
+  color: var(--color-ink);
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+.slide *,
+.slide *::before,
+.slide *::after {
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+}
+
+.slide img {
+  display: block;
+}
+
+.slide li {
+  margin-inline-start: calc(16.3 * var(--u));
+}
+
+.slide li::marker {
+  font-size: calc(10.875 * var(--u));
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1023px) {
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "repo links"
+      "identity status";
+    row-gap: 32px;
+  }
+
+  .site-header__repo { grid-area: repo; }
+  .site-header__identity { grid-area: identity; }
+  .site-header__status { grid-area: status; }
+  .site-header__links { grid-area: links; }
+
+  .project__header {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    grid-template-areas:
+      "name title"
+      "name meta";
+    row-gap: 12px;
+    min-height: 0;
+    padding-bottom: 32px;
+  }
+
+  .project__name { grid-area: name; }
+  .project__title { grid-area: title; }
+  .project__meta { grid-area: meta; }
+
+  .project__body {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 32px;
+  }
+
+  .project__text {
+    width: 36rem;
+  }
+
+  .site-footer {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    column-gap: 32px;
+  }
+
+  .site-footer__link { grid-column: auto; }
+}
+
+/* ---------- Phone ---------- */
+
+@media (max-width: 640px) {
+  :root {
+    --page-padding: 20px;   /* 60px would leave a 255px column on a 375px phone */
+  }
+
+  .site-header {
+    grid-template-areas:
+      "repo links"
+      "identity identity"
+      "status status";
+    row-gap: 28px;
+  }
+
+  .project__header {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "name"
+      "title"
+      "meta";
+    padding-bottom: 28px;
+  }
+
+  .project__title {
+    margin-top: 8px;
+  }
+
+  .project__body {
+    padding-bottom: 40px;
+    row-gap: 28px;
+  }
+
+  .button {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .site-footer {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 4px;
+  }
+
+  .site-footer__link { justify-self: start; }
+}

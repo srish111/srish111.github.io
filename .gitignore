@@ -1,0 +1,6 @@
+# Local only, not published:
+# preview-server settings for the Claude app
+.claude/
+# page generator for the case studies
+tools/
+.DS_Store
