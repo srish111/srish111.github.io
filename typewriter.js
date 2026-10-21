@@ -1,14 +1,12 @@
 // Typewriter for the project headings.
 // Each heading types itself the first time it is mostly in view, once per visit
 // (a browser tab session): reloading or coming back from a case study shows it
-// in full. Typing takes about 2-3 seconds whatever the heading's length, then the
+// in full. Letters appear at the Figma prototype's pace (50 ms each), then the
 // cursor blinks a few times and goes away. With reduced motion, or without
 // JavaScript, the heading is simply shown in full; screen readers always get the
 // whole heading at once.
 (function () {
-  var TARGET_MS = 2000;                  // aim for ~2 s per heading
-  var MIN_MS_PER_CHAR = 20;              // ...but never faster than 50 letters a second
-  var MAX_MS_PER_CHAR = 50;              // ...or slower than the Figma prototype
+  var MS_PER_CHAR = 50;                  // same pace as the Figma Sites prototype
   var CURSOR_LINGER_MS = 3300;           // three blinks after typing, then hide
   var STORAGE_KEY = "typed-headings";
 
@@ -50,8 +48,6 @@
     heading.textContent = "";
     heading.append(spoken, glyphs);
 
-    var msPerChar = Math.min(MAX_MS_PER_CHAR, Math.max(MIN_MS_PER_CHAR, TARGET_MS / chars.length));
-
     function type() {
       remember(text);
       glyphs.classList.add("is-typing");
@@ -65,7 +61,7 @@
           glyphs.classList.remove("is-typing");
           setTimeout(function () { caret.remove(); }, CURSOR_LINGER_MS);
         }
-      }, msPerChar);
+      }, MS_PER_CHAR);
     }
 
     var observer = new IntersectionObserver(function (entries) {
