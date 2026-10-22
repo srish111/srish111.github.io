@@ -144,38 +144,40 @@ a:focus-visible {
 
 /* ---------- Hero (Figma 53:3520) ---------- */
 
-.hero {
+/* At every width the header and hero fill exactly the browser window, as on the
+   Cargo reference: the heading sits on the bottom edge, inside the same frame
+   (the page padding) as the header at the top, and the projects start below the fold. */
+.intro {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  min-height: calc(100vh - var(--page-padding));
+  min-height: calc(100svh - var(--page-padding));
+}
+
+.hero {
+  --hero-gap: clamp(96px, 13svh, 160px);   /* header to heading, at least; grows with the window's height */
+  --hero-fit: 63cqw;                       /* how wide the longest line runs */
+  --frame-used: 226px;                     /* page padding above and below, plus the header */
+  container-type: inline-size;
+  flex: 1;
+  display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
-  padding-top: clamp(56px, 12.34vw, 158px);
-  padding-bottom: clamp(40px, 8.125vw, 104px);
+  padding-top: var(--hero-gap);
+  padding-bottom: var(--page-padding);
 }
 
 .hero__title {
-  font-size: clamp(46px, 9.375vw, 120px);
-  font-weight: 500;
+  /* Set like the Cargo reference: Regular, tracked tight, and sized so the longest
+     line ("in designerly", 4.72em) runs the --hero-fit width. Capped by the window's
+     height so the heading never runs into the header: it is 3.75em tall. */
+  font-size: clamp(46px, 9.375vw, 120px);   /* for browsers without container or small-viewport units */
+  font-size: max(36px, min(var(--hero-fit) / 4.72, (100svh - var(--frame-used) - var(--hero-gap)) / 3.75));
+  font-weight: 400;
   line-height: var(--leading-tight);
-  letter-spacing: -0.00983em;   /* -1.18px at 120px */
+  letter-spacing: -0.05em;
 }
 
-.hero__last {
-  position: relative;
-  display: block;
-  font-size: 0.98333em;          /* last line is 118px in the design */
-  white-space: pre;
-}
-
-.hero__eye {
-  position: absolute;
-  left: 0.1288em;
-  top: 0.2322em;
-  width: 0.7628em;
-  height: auto;
-}
-
+/* Bottom right of the frame, level with the heading's last line, as in Figma */
 .hero__photo {
   flex: none;
   width: 156.061px;
@@ -184,6 +186,22 @@ a:focus-visible {
   border-radius: var(--radius-media);
   object-fit: cover;
   transform: scaleX(-1);   /* mirrored, as in Figma: the plant sits on the side facing the title */
+}
+
+.hero__last {
+  position: relative;
+  display: block;
+  font-size: 0.98333em;          /* last line is 118px in the design */
+  white-space: pre;
+  word-spacing: 0.041em;         /* the six spaces that make room for the eye keep their 0.25em gap under the tight tracking */
+}
+
+.hero__eye {
+  position: absolute;
+  left: 0.1288em;
+  top: 0.2322em;
+  width: 0.7628em;
+  height: auto;
 }
 
 /* ---------- Projects (Figma 53:4417 – 53:4520) ---------- */
@@ -515,6 +533,22 @@ a:focus-visible {
   }
 
   .site-footer__link { grid-column: auto; }
+
+  /* As on Cargo's narrow layout, the heading runs the full width, so the photo
+     moves into the open space above it, still on the right */
+  .hero {
+    --hero-fit: 100cqw;
+    --frame-used: 448px;   /* the header wraps to two rows (164px); the photo and its gap take 164px */
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  .hero__photo {
+    order: -1;
+    align-self: flex-end;
+    margin: 0 0 24px;
+  }
 }
 
 /* ---------- Phone ---------- */
@@ -522,6 +556,11 @@ a:focus-visible {
 @media (max-width: 640px) {
   :root {
     --page-padding: 20px;   /* 60px would leave a 255px column on a 375px phone */
+  }
+
+  .hero {
+    --hero-gap: 48px;
+    --frame-used: 468px;   /* the header stacks to 264px; the photo and its gap take 164px */
   }
 
   .site-header {
