@@ -221,7 +221,7 @@ a:focus-visible {
   align-items: start;
   min-height: 110px;
   padding-top: 10.4px;   /* 16px of clear space between the divider and the capitals, as on the Cargo reference */
-  border-top: 2px solid var(--color-ink);
+  border-top: 1px solid var(--color-ink);
 }
 
 .project__codename {
@@ -401,7 +401,7 @@ a:focus-visible {
   grid-template-columns: var(--grid-columns);
   align-items: start;
   padding-top: 11.1px;   /* 16px of clear space under the line, as in the project headers */
-  border-top: 2px solid var(--color-ink);
+  border-top: 1px solid var(--color-ink);
   line-height: var(--leading-body);
 }
 
