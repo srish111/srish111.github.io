@@ -252,15 +252,19 @@ a:focus-visible {
   font-weight: 500;
 }
 
+/* On the shared grid: the text sits in the first column and the thumbnail runs from
+   the title column to the page edge, as Cargo's images start on its column lines */
 .project__body {
   display: grid;
-  grid-template-columns: 307px minmax(0, 1fr);
-  column-gap: 68.287px;
+  grid-template-columns: var(--grid-columns);
   align-items: start;   /* text starts at the image's top edge */
   padding-bottom: 48px;
 }
 
 .project__content {
+  grid-column: 1;
+  min-width: 0;
+  padding-right: 24px;   /* clear space before the thumbnail where the first column is narrow */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -323,6 +327,7 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   width: 226px;
+  max-width: 100%;   /* the first column is narrower than the button just above the tablet breakpoint */
   height: 36px;
   border-radius: var(--radius-button);
   background: var(--color-ink);
@@ -353,6 +358,7 @@ a:focus-visible {
 }
 
 .project__media {
+  grid-column: 2 / -1;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -525,6 +531,11 @@ a:focus-visible {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 32px;
   }
+
+  .project__content,
+  .project__media { grid-column: auto; }   /* stacked, full width */
+
+  .project__content { padding-right: 0; }
 
   .project__text {
     width: 36rem;
