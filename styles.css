@@ -18,8 +18,10 @@
 
   --text-sm: 14px;
   --text-md: 24px;
-  --leading-tight: 0.94;
-  --leading-list: 18.1px;   /* 14px rows in the design sit 18.1px apart */
+  /* Line heights on a 4px rhythm, opened up for Mona Sans's tall lowercase */
+  --leading-body: 20px;      /* 14px text, 1.43 */
+  --leading-heading: 28px;   /* 24px text, 1.17 */
+  --leading-display: 0.94;   /* the hero heading only */
   --tracking-sm: -0.07px;
   --tracking-body: -0.14px;
   --tracking-md: -0.12px;   /* -0.5%, as in Figma */
@@ -103,41 +105,41 @@ a:focus-visible {
   grid-template-columns: var(--grid-columns);
   align-items: start;
   min-height: 106px;
-  padding-bottom: 5px;
+  padding-bottom: 4.5px;
 }
 
 /* The first line of every column sits on one baseline, 16.5px down, level with
    "Srishti" as in Figma; the margins below line each column up to it. */
 .site-header__repo {
-  margin-top: 5px;
-  line-height: 0.96;
+  margin-top: 1.5px;
+  line-height: var(--leading-body);
 }
 
 .site-header__identity {
-  margin-top: -4.5px;
+  margin-top: -6.5px;
   font-size: var(--text-md);
-  line-height: 24px;
+  line-height: var(--leading-heading);
   letter-spacing: var(--tracking-md);
   white-space: nowrap;   /* one line each, even where the column is narrower than the role */
 }
 
 .site-header__role {
-  margin-top: 24px;
+  margin-top: 24px;   /* with the blank line in the status column, "Research…" sits level with "Bachelors…" */
 }
 
 .site-header__status,
 .site-header__links {
-  margin-top: 2.5px;
-  line-height: var(--leading-list);
+  margin-top: 1.5px;
+  line-height: var(--leading-body);
 }
 
 .site-header__current {
   color: var(--color-sage);
-  font-weight: 600;   /* SemiBold is the one emphasis weight; all other text is Regular, as on the Cargo reference */
+  font-weight: 700;   /* Bold is the one emphasis weight; all other text is Regular, as on the Cargo reference */
 }
 
 .site-header__education {
-  margin-top: var(--leading-list);
+  margin-top: var(--leading-body);   /* one blank line */
 }
 
 .site-header__links {
@@ -180,7 +182,7 @@ a:focus-visible {
   font-size: clamp(46px, 9.375vw, 120px);   /* for browsers without container or small-viewport units */
   font-size: max(36px, min(var(--hero-fit) / 5.32, (100svh - var(--frame-used) - var(--hero-gap)) / 3.75));
   font-weight: 400;
-  line-height: var(--leading-tight);
+  line-height: var(--leading-display);
   letter-spacing: -0.05em;
 }
 
@@ -218,19 +220,18 @@ a:focus-visible {
   grid-template-columns: var(--grid-columns);
   align-items: start;
   min-height: 110px;
-  padding-top: 12.9px;   /* 16px of clear space between the divider and the capitals, as on the Cargo reference */
+  padding-top: 10.4px;   /* 16px of clear space between the divider and the capitals, as on the Cargo reference */
   border-top: 2px solid var(--color-ink);
 }
 
 .project__codename {
   font-size: var(--text-md);
-  line-height: var(--leading-tight);   /* same as the title, so the two share a baseline */
+  line-height: var(--leading-heading);   /* same as the title, so the two share a baseline */
   letter-spacing: var(--tracking-md);
 }
 
 .project__kind {
-  margin-top: 2px;
-  line-height: 18px;
+  line-height: var(--leading-body);   /* one body line under the name */
 }
 
 .project__title {
@@ -238,18 +239,18 @@ a:focus-visible {
   color: var(--color-muted);
   font-size: var(--text-md);
   font-weight: 400;
-  line-height: var(--leading-tight);
+  line-height: var(--leading-heading);
   letter-spacing: var(--tracking-md);
 }
 
 .project__meta {
-  margin-top: -0.8px;   /* capitals start level with the name's and title's */
-  line-height: var(--leading-list);
+  margin-top: 0.7px;   /* capitals start level with the name's and title's */
+  line-height: var(--leading-body);
 }
 
 .project__status {
   color: var(--color-sage);   /* the same "current" green, and weight, as the header's role */
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* On the shared grid: the text sits in the first column and the thumbnail runs from
@@ -277,13 +278,13 @@ a:focus-visible {
   gap: var(--space-related);
   width: 278px;
   max-width: 100%;
-  line-height: var(--leading-tight);
+  line-height: var(--leading-body);
   letter-spacing: var(--tracking-body);
 }
 
 .project__lede {
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* Typewriter (typewriter.js): untyped letters keep their space, so nothing reflows. */
@@ -335,7 +336,7 @@ a:focus-visible {
   font-family: var(--font-ui);
   font-size: var(--text-sm);
   font-weight: 500;
-  line-height: 1.45;
+  line-height: var(--leading-body);
   letter-spacing: var(--tracking-sm);
   white-space: nowrap;
   transition: transform 200ms ease-out;
@@ -399,9 +400,9 @@ a:focus-visible {
   display: grid;
   grid-template-columns: var(--grid-columns);
   align-items: start;
-  padding-top: 12.1px;   /* 16px of clear space under the line, as in the project headers */
+  padding-top: 11.1px;   /* 16px of clear space under the line, as in the project headers */
   border-top: 2px solid var(--color-ink);
-  line-height: var(--leading-list);
+  line-height: var(--leading-body);
 }
 
 /* The sign-off leads into the Resume link, in the details column ("Currently:", project details) */
@@ -431,7 +432,7 @@ a:focus-visible {
   min-height: 57px;
   border-top: 1px solid var(--color-ink);
   font-weight: 500;
-  line-height: var(--leading-list);
+  line-height: var(--leading-body);
 }
 
 .cs-header__back {
@@ -548,7 +549,7 @@ a:focus-visible {
      width, less the photo beside it */
   .hero {
     --hero-fit: calc(100cqw - 180px);   /* the photo and a 24px gap */
-    --frame-used: 343px;                /* the header wraps to two rows, 222.5px */
+    --frame-used: 360px;                /* the header wraps to two rows, 239.5px */
   }
 }
 
@@ -574,9 +575,9 @@ a:focus-visible {
   /* The heading runs the full width, so the photo moves into the open space
      above it, still on the right */
   .hero {
-    --hero-gap: 40px;
+    --hero-gap: 28px;
     --hero-fit: 100cqw;
-    --frame-used: 490px;   /* the header stacks to 285.2px; the photo and its gap take 164px */
+    --frame-used: 501px;   /* the page padding (40px), the header stacked to 297px, and the photo and its gap (163.5px) */
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
@@ -594,7 +595,7 @@ a:focus-visible {
       "repo links"
       "identity identity"
       "status status";
-    row-gap: 28px;
+    row-gap: 24px;
   }
 
   /* "Research+Strategy+Design" is 12.7em wide: on the narrowest phones the name block
