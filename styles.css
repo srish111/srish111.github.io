@@ -5,9 +5,8 @@
   --color-bg: #fff;
   --color-ink: #000;
   --color-muted: #939393;
-  --color-sage: #6d9145;
+  --color-sage: #5f803b;   /* Figma's #6d9145, darkened to 4.5:1 on white for 14px text (WCAG AA) */
   --color-plum: #6f448c;
-  --color-lime: #8cac3a;
   --color-button-disabled: rgba(0, 0, 0, 0.25);
   --shadow-media: 0 0 3.3px rgba(0, 0, 0, 0.25);
   --color-block-ink: #050506;
@@ -247,7 +246,7 @@ a:focus-visible {
 }
 
 .project__status {
-  color: var(--color-lime);
+  color: var(--color-sage);   /* the same "current" green as the header's role */
   font-weight: 600;
 }
 
