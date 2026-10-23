@@ -600,14 +600,14 @@ a:focus-visible {
     max-width: 320px;
   }
 
-  /* The sign-off and Resume link beside the photo, the copyright under them */
+  /* The sign-off, the Resume link and, after a blank line, the copyright, beside the photo */
   .site-footer {
     grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr;
     grid-template-areas:
       "tagline photo"
       "link    photo"
-      "copy    copy";
+      "copy    photo";
     column-gap: 24px;
     row-gap: 4px;
   }
@@ -628,5 +628,10 @@ a:focus-visible {
     display: block;
     grid-area: photo;
     margin-top: 4.8px;   /* its top level with the capitals, 16px under the line */
+    /* a little smaller on the narrowest phones, so "© 2026 All Rights Reserved" (13em)
+       stays on one line beside it */
+    width: min(156.061px, 100vw - 2 * var(--page-padding) - 24px - 13em);
+    height: auto;
+    aspect-ratio: 156.061 / 139.483;
   }
 }
