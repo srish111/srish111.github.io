@@ -26,6 +26,13 @@
   --tracking-md: -0.1px;
 
   --page-padding: 60px;   /* Figma frame: 60px on every side */
+  /* One column grid shared by the header, project headers and footer: the Figma
+     project-header columns (titles start on the 359.9px guide) */
+  --grid-columns:
+    minmax(0, 299.888fr)
+    minmax(0, 437.888fr)
+    minmax(0, 365.888fr)
+    minmax(0, 56.336fr);
   --space-related: 24px;   /* inside a group: heading → its paragraph */
   --space-group: 32px;     /* between groups: text → call to action */
   --radius-button: 12px;
@@ -94,11 +101,7 @@ a:focus-visible {
 
 .site-header {
   display: grid;
-  grid-template-columns:
-    minmax(0, 300.635fr)
-    minmax(0, 422.635fr)
-    minmax(0, 366.634fr)
-    minmax(0, 70.096fr);
+  grid-template-columns: var(--grid-columns);
   align-items: start;
   min-height: 106px;
   padding-bottom: 5px;
@@ -135,6 +138,7 @@ a:focus-visible {
 }
 
 .site-header__links {
+  justify-self: end;   /* wider than the last column, so it hangs from the right edge */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -208,11 +212,7 @@ a:focus-visible {
 
 .project__header {
   display: grid;
-  grid-template-columns:
-    minmax(0, 299.888fr)
-    minmax(0, 437.888fr)
-    minmax(0, 365.888fr)
-    minmax(0, 56.336fr);
+  grid-template-columns: var(--grid-columns);
   align-items: start;
   min-height: 110px;
   padding-top: 14px;   /* 16px from the divider's top edge, which sits inside the box */
@@ -390,11 +390,7 @@ a:focus-visible {
 
 .site-footer {
   display: grid;
-  grid-template-columns:
-    minmax(0, 367.888fr)
-    minmax(0, 367.888fr)
-    minmax(0, 367.888fr)
-    minmax(0, 56.336fr);
+  grid-template-columns: var(--grid-columns);
   align-items: start;
   padding-top: 14px;
   border-top: 2px solid var(--color-ink);
@@ -491,11 +487,16 @@ a:focus-visible {
 /* ---------- Tablet ---------- */
 
 @media (max-width: 1023px) {
+  /* Three equal columns: titles and the name block start a third of the way in,
+     and the details sit beneath them in the same column */
+  :root {
+    --grid-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .site-header {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-areas:
-      "repo links"
-      "identity status";
+      "repo identity links"
+      ".    status   status";
     row-gap: 32px;
   }
 
@@ -505,10 +506,9 @@ a:focus-visible {
   .site-header__links { grid-area: links; }
 
   .project__header {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     grid-template-areas:
-      "name title"
-      "name meta";
+      "name title title"
+      "name meta  meta";
     row-gap: 12px;
     min-height: 0;
     padding-bottom: 32px;
@@ -527,27 +527,13 @@ a:focus-visible {
     width: 36rem;
   }
 
-  .site-footer {
-    grid-template-columns: minmax(0, 1fr) auto auto;
-    column-gap: 32px;
-  }
+  .site-footer__link { grid-column: 3; }
 
-  .site-footer__link { grid-column: auto; }
-
-  /* As on Cargo's narrow layout, the heading runs the full width, so the photo
-     moves into the open space above it, still on the right */
+  /* As on Cargo's narrow layout, the heading runs as wide as it can: the full
+     width, less the photo beside it */
   .hero {
-    --hero-fit: 100cqw;
-    --frame-used: 448px;   /* the header wraps to two rows (164px); the photo and its gap take 164px */
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-  }
-
-  .hero__photo {
-    order: -1;
-    align-self: flex-end;
-    margin: 0 0 24px;
+    --hero-fit: calc(100cqw - 180px);   /* the photo and a 24px gap */
+    --frame-used: 324px;                /* the header wraps to two rows, 204px */
   }
 }
 
@@ -558,12 +544,25 @@ a:focus-visible {
     --page-padding: 20px;   /* 60px would leave a 255px column on a 375px phone */
   }
 
+  /* The heading runs the full width, so the photo moves into the open space
+     above it, still on the right */
   .hero {
     --hero-gap: 48px;
+    --hero-fit: 100cqw;
     --frame-used: 468px;   /* the header stacks to 264px; the photo and its gap take 164px */
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  .hero__photo {
+    order: -1;
+    align-self: flex-end;
+    margin: 0 0 24px;
   }
 
   .site-header {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-areas:
       "repo links"
       "identity identity"
@@ -599,5 +598,8 @@ a:focus-visible {
     row-gap: 4px;
   }
 
-  .site-footer__link { justify-self: start; }
+  .site-footer__link {
+    grid-column: auto;
+    justify-self: start;
+  }
 }
