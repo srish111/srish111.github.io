@@ -398,6 +398,9 @@ a:focus-visible {
   line-height: var(--leading-list);
 }
 
+/* The sign-off leads into the Resume link, in the details column ("Currently:", project details) */
+.site-footer__tagline { grid-column: 3; }
+
 .site-footer__link {
   grid-column: 4;
   justify-self: end;
@@ -527,6 +530,7 @@ a:focus-visible {
     width: 36rem;
   }
 
+  .site-footer__tagline { grid-column: 2; }   /* the details column on tablets */
   .site-footer__link { grid-column: 3; }
 
   /* As on Cargo's narrow layout, the heading runs as wide as it can: the full
@@ -597,6 +601,8 @@ a:focus-visible {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 4px;
   }
+
+  .site-footer__tagline { grid-column: auto; }
 
   .site-footer__link {
     grid-column: auto;
