@@ -575,9 +575,9 @@ a:focus-visible {
   /* The heading runs the full width, so the photo moves into the open space
      above it, still on the right */
   .hero {
-    --hero-gap: 28px;
+    --hero-gap: 20px;      /* phones use one 20px gap between the header's rows, the photo and the heading */
     --hero-fit: 100cqw;
-    --frame-used: 501px;   /* the page padding (40px), the header stacked to 297px, and the photo and its gap (163.5px) */
+    --frame-used: 509px;   /* the page padding (40px), the header stacked to 309px, and the photo and its gap (159.5px) */
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
@@ -586,7 +586,7 @@ a:focus-visible {
   .hero__photo {
     order: -1;
     align-self: flex-end;
-    margin: 0 0 24px;
+    margin: 0 0 20px;
   }
 
   .site-header {
@@ -595,7 +595,7 @@ a:focus-visible {
       "repo links"
       "identity identity"
       "status status";
-    row-gap: 24px;
+    row-gap: 20px;
   }
 
   /* "Research+Strategy+Design" is 12.7em wide: on the narrowest phones the name block
