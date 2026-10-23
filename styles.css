@@ -104,7 +104,6 @@ a:focus-visible {
   align-items: start;
   min-height: 106px;
   padding-bottom: 5px;
-  font-weight: 500;   /* Medium, except the name block below (Figma uses Regular) */
 }
 
 /* The first line of every column sits on one baseline, 16.5px down, level with
@@ -116,7 +115,6 @@ a:focus-visible {
 
 .site-header__identity {
   margin-top: -5.5px;
-  font-weight: 400;
   font-size: var(--text-md);
   line-height: 24px;
   letter-spacing: var(--tracking-md);
@@ -135,7 +133,7 @@ a:focus-visible {
 
 .site-header__current {
   color: var(--color-sage);
-  font-weight: 500;
+  font-weight: 500;   /* Medium is the one emphasis weight; all other text is Regular, as on the Cargo reference */
 }
 
 .site-header__education {
@@ -224,13 +222,8 @@ a:focus-visible {
   border-top: 2px solid var(--color-ink);
 }
 
-.project__name {
-  font-weight: 500;
-}
-
 .project__codename {
   font-size: var(--text-md);
-  font-weight: 400;
   line-height: var(--leading-tight);   /* same as the title, so the two share a baseline */
   letter-spacing: var(--tracking-md);
 }
@@ -251,7 +244,6 @@ a:focus-visible {
 
 .project__meta {
   margin-top: 0.5px;   /* capitals start level with the name's and title's */
-  font-weight: 500;
   line-height: var(--leading-list);
 }
 
@@ -287,7 +279,7 @@ a:focus-visible {
 
 .project__lede {
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* Typewriter (typewriter.js): untyped letters keep their space, so nothing reflows. */
@@ -403,7 +395,6 @@ a:focus-visible {
   align-items: start;
   padding-top: 11px;   /* 16px of clear space under the line, as in the project headers */
   border-top: 2px solid var(--color-ink);
-  font-weight: 500;
   line-height: var(--leading-list);
 }
 
