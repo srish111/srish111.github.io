@@ -408,6 +408,16 @@ a:focus-visible {
 /* The sign-off leads into the Resume link, in the details column ("Currently:", project details) */
 .site-footer__tagline { grid-column: 3; }
 
+/* A copy of the hero photo, shown in the mobile layout */
+.site-footer__photo {
+  display: none;
+  width: 156.061px;
+  height: 139.483px;
+  border-radius: var(--radius-media);
+  object-fit: cover;
+  transform: scaleX(-1);   /* mirrored, as in the hero */
+}
+
 .site-footer__link {
   grid-column: 4;
   justify-self: end;
@@ -494,43 +504,86 @@ a:focus-visible {
   font-size: calc(10.875 * var(--u));
 }
 
-/* ---------- Tablet ---------- */
+/* ---------- Mobile layout ----------
+   As on the Cargo reference, the site has two layouts and the screen's shape picks
+   between them: the column grid above on landscape screens at least 1024px wide, and
+   this one on portrait screens (4:5 or taller) and anything narrower. Text keeps its
+   14px and 24px sizes in both. */
 
-@media (max-width: 1023px) {
-  /* Three equal columns: titles and the name block start a third of the way in,
-     and the details sit beneath them in the same column */
+@media (max-width: 1023px), (max-aspect-ratio: 4/5) {
   :root {
-    --grid-columns: repeat(3, minmax(0, 1fr));
+    --page-padding: clamp(20px, 5vw, 48px);
   }
 
+  /* Two columns, as in the Cargo reference's phone layout: the site name and links on
+     the left, the name block and status on the right. On phones "Case Study / Repo"
+     takes two lines, leaving the name block room for "Strategic Designer". */
   .site-header {
+    grid-template-columns: minmax(6.2em, 0.4fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
-      "repo identity links"
-      ".    status   status";
-    row-gap: 32px;
+      "repo  identity"
+      "links identity"
+      ".     status";
+    column-gap: 24px;
+    row-gap: 20px;
   }
 
   .site-header__repo { grid-area: repo; }
-  .site-header__identity { grid-area: identity; }
   .site-header__status { grid-area: status; }
-  .site-header__links { grid-area: links; }
+
+  .site-header__identity {
+    grid-area: identity;
+    white-space: normal;
+  }
+
+  /* always "Research+ / Strategy+Design", so the header keeps one height */
+  .site-header__identity p:last-child {
+    max-width: 8.2em;
+  }
+
+  .site-header__links {
+    grid-area: links;
+    justify-self: start;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /* The heading runs the full width at the foot of the first screen; the photo moves
+     to the footer, beside the sign-off */
+  .hero {
+    --hero-gap: 20px;
+    --hero-fit: 100cqw;
+    --frame-used: calc(2 * var(--page-padding) + 255.5px);   /* the page padding and the two-column header */
+  }
+
+  .hero__photo {
+    display: none;
+  }
 
   .project__header {
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "name title title"
-      "name meta  meta";
+      "name"
+      "title"
+      "meta";
     row-gap: 12px;
     min-height: 0;
-    padding-bottom: 32px;
+    padding-bottom: 28px;
   }
 
   .project__name { grid-area: name; }
-  .project__title { grid-area: title; }
   .project__meta { grid-area: meta; }
+
+  .project__title {
+    grid-area: title;
+    margin-top: 8px;
+  }
 
   .project__body {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 32px;
+    row-gap: 28px;
+    padding-bottom: 40px;
   }
 
   .project__content,
@@ -542,100 +595,38 @@ a:focus-visible {
     width: 36rem;
   }
 
-  .site-footer__tagline { grid-column: 2; }   /* the details column on tablets */
-  .site-footer__link { grid-column: 3; }
-
-  /* As on Cargo's narrow layout, the heading runs as wide as it can: the full
-     width, less the photo beside it */
-  .hero {
-    --hero-fit: calc(100cqw - 180px);   /* the photo and a 24px gap */
-    --frame-used: 360px;                /* the header wraps to two rows, 239.5px */
-  }
-}
-
-/* Narrow tablets: "Research+Strategy+Design" would run into the links, so the
-   links move under "Case Study Repo" and the name block spans both right columns */
-@media (min-width: 641px) and (max-width: 700px) {
-  .site-header {
-    grid-template-areas:
-      "repo  identity identity"
-      "links status   status";
-  }
-
-  .site-header__links { justify-self: start; }
-}
-
-/* ---------- Phone ---------- */
-
-@media (max-width: 640px) {
-  :root {
-    --page-padding: 20px;   /* 60px would leave a 255px column on a 375px phone */
-  }
-
-  /* The heading runs the full width, so the photo moves into the open space
-     above it, still on the right */
-  .hero {
-    --hero-gap: 20px;      /* phones use one 20px gap between the header's rows, the photo and the heading */
-    --hero-fit: 100cqw;
-    --frame-used: 509px;   /* the page padding (40px), the header stacked to 309px, and the photo and its gap (159.5px) */
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-  }
-
-  .hero__photo {
-    order: -1;
-    align-self: flex-end;
-    margin: 0 0 20px;
-  }
-
-  .site-header {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas:
-      "repo links"
-      "identity identity"
-      "status status";
-    row-gap: 20px;
-  }
-
-  /* "Research+Strategy+Design" is 12.7em wide: on the narrowest phones the name block
-     scales down so it still fits on one line */
-  .site-header__identity {
-    font-size: min(var(--text-md), (100vw - 40px) / 12.7);
-  }
-
-  .project__header {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "name"
-      "title"
-      "meta";
-    padding-bottom: 28px;
-  }
-
-  .project__title {
-    margin-top: 8px;
-  }
-
-  .project__body {
-    padding-bottom: 40px;
-    row-gap: 28px;
-  }
-
   .button {
     width: 100%;
     max-width: 320px;
   }
 
+  /* The sign-off and Resume link beside the photo, the copyright under them */
   .site-footer {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "tagline photo"
+      "link    photo"
+      "copy    copy";
+    column-gap: 24px;
     row-gap: 4px;
   }
 
-  .site-footer__tagline { grid-column: auto; }
+  .site-footer > p:first-child {
+    grid-area: copy;
+    margin-top: 16px;
+  }
+
+  .site-footer__tagline { grid-area: tagline; }
 
   .site-footer__link {
-    grid-column: auto;
+    grid-area: link;
     justify-self: start;
+  }
+
+  .site-footer__photo {
+    display: block;
+    grid-area: photo;
+    margin-top: 4.8px;   /* its top level with the capitals, 16px under the line */
   }
 }
