@@ -40,6 +40,41 @@
   --radius-media: 15px;
 }
 
+/* Dark theme, for devices set to dark mode: the Cargo reference's inverted palette */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --color-bg: #191919;
+    --color-ink: #dddddd;     /* 12.9:1 */
+    --color-muted: #757575;   /* 3.8:1; used only on 24px text, which WCAG AA counts as large */
+    --color-sage: #6d9145;    /* Figma's green, 4.8:1 on the dark background */
+    --color-plum: #b48ddb;    /* focus ring, 6.5:1 */
+    --color-button-disabled: rgba(255, 255, 255, 0.25);
+  }
+
+  /* the eye is drawn in the light theme's ink; inverted it matches the dark theme's */
+  .hero__eye {
+    filter: invert(1) brightness(1.02);
+  }
+
+  /* each project's own dark thumbnail (index.html), shown whole at its own proportions */
+  .project .project__media--ridebuddy { aspect-ratio: 1967 / 863; }
+  .project .project__media--darkstores { aspect-ratio: 1967 / 835; }
+  .project .project__media--bnpl { aspect-ratio: 1962 / 827; }
+  .project .project__media--inbetween { aspect-ratio: 1962 / 827; }
+
+  .project .project__media img { object-position: 50% 50%; }
+
+  /* the blueprint's coloured blocks are drawn into its dark version */
+  .project .media-block { display: none; }
+
+  /* case-study slides keep the colours they were designed in */
+  .slide {
+    color: #262626;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -332,7 +367,7 @@ a:focus-visible {
   height: 36px;
   border-radius: var(--radius-button);
   background: var(--color-ink);
-  color: #fff;
+  color: var(--color-bg);
   font-family: var(--font-ui);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -367,6 +402,9 @@ a:focus-visible {
   border-radius: var(--radius-media);
   box-shadow: var(--shadow-media);
 }
+
+/* a <picture> that swaps in a dark-mode version takes no box of its own */
+.project__media picture { display: contents; }
 
 .project__media img {
   width: 100%;
