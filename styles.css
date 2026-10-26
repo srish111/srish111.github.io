@@ -1,17 +1,15 @@
-/* Tokens taken from the Figma file (Page 1 › Desktop, 1280px frame). */
+/* Tokens taken from the Figma file (Page 1 › Desktop, 1280px frame). The site is dark for
+   every visitor: the Cargo reference's inverted palette. */
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  --color-bg: #fff;
-  --color-ink: #262626;   /* the Cargo reference's text colour, black at 85%, as a solid colour on white; 15.1:1 */
-  --color-muted: #717171;   /* Figma's grey for the name block and project titles; 4.9:1 on white */
-  --color-sage: #5f803b;   /* Figma's #6d9145, darkened to 4.5:1 on white for 14px text (WCAG AA) */
-  --color-plum: #6f448c;
-  --color-button-disabled: rgba(0, 0, 0, 0.25);
+  --color-bg: #191919;
+  --color-ink: #dddddd;     /* 12.9:1 */
+  --color-muted: #757575;   /* 3.8:1; used only on 24px text, which WCAG AA counts as large */
+  --color-sage: #6d9145;    /* Figma's green, 4.8:1 on the dark background */
+  --color-plum: #b48ddb;    /* focus ring, 6.5:1 */
+  --color-button-disabled: rgba(255, 255, 255, 0.25);
   --shadow-media: 0 0 3.3px rgba(0, 0, 0, 0.25);
-  --color-block-ink: #050506;
-  --color-block-mint: #7cfbe3;
-  --color-block-sky: #dfeeff;
 
   --font-sans: "Mona Sans", system-ui, -apple-system, "Segoe UI", sans-serif;   /* a free neo-grotesk in the spirit of the Cargo reference's Monument Grotesk */
   --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -38,41 +36,6 @@
   --space-group: 32px;     /* between groups: text → call to action */
   --radius-button: 12px;
   --radius-media: 15px;
-}
-
-/* Dark theme, for devices set to dark mode: the Cargo reference's inverted palette */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-
-    --color-bg: #191919;
-    --color-ink: #dddddd;     /* 12.9:1 */
-    --color-muted: #757575;   /* 3.8:1; used only on 24px text, which WCAG AA counts as large */
-    --color-sage: #6d9145;    /* Figma's green, 4.8:1 on the dark background */
-    --color-plum: #b48ddb;    /* focus ring, 6.5:1 */
-    --color-button-disabled: rgba(255, 255, 255, 0.25);
-  }
-
-  /* the eye is drawn in the light theme's ink; inverted it matches the dark theme's */
-  .hero__eye {
-    filter: invert(1) brightness(1.02);
-  }
-
-  /* each project's own dark thumbnail (index.html), shown whole at its own proportions */
-  .project .project__media--ridebuddy { aspect-ratio: 1967 / 863; }
-  .project .project__media--darkstores { aspect-ratio: 1967 / 835; }
-  .project .project__media--bnpl { aspect-ratio: 1962 / 827; }
-  .project .project__media--inbetween { aspect-ratio: 1962 / 827; }
-
-  .project .project__media img { object-position: 50% 50%; }
-
-  /* the blueprint's coloured blocks are drawn into its dark version */
-  .project .media-block { display: none; }
-
-  /* case-study slides keep the colours they were designed in */
-  .slide {
-    color: #262626;
-  }
 }
 
 *,
@@ -398,13 +361,9 @@ a:focus-visible {
   position: relative;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 784.713 / 333.106;
   border-radius: var(--radius-media);
   box-shadow: var(--shadow-media);
 }
-
-/* a <picture> that swaps in a dark-mode version takes no box of its own */
-.project__media picture { display: contents; }
 
 .project__media img {
   width: 100%;
@@ -412,25 +371,11 @@ a:focus-visible {
   object-fit: cover;
 }
 
-.project__media--ridebuddy { aspect-ratio: 783.97 / 344.642; }
-.project__media--ridebuddy img { object-position: 50% 59%; }
-.project__media--darkstores { aspect-ratio: 1981 / 840; }
-.project__media--bnpl img { object-position: 50% 57.3%; }
-.project__media--inbetween img { object-position: 50% 24.6%; }
-
-/* Positions are the Figma values on the 784.713 × 333.106 image, scaled with it. */
-.media-block {
-  position: absolute;
-  left: calc(var(--x) / 784.713 * 100%);
-  top: calc(var(--y) / 333.106 * 100%);
-  width: calc(var(--w) / 784.713 * 100%);
-  height: calc(var(--h) / 333.106 * 100%);
-  border-radius: 2px;
-}
-
-.media-block--ink { background: var(--color-block-ink); }
-.media-block--mint { background: var(--color-block-mint); }
-.media-block--sky { background: var(--color-block-sky); }
+/* each thumbnail shown whole, at its own proportions */
+.project__media--ridebuddy { aspect-ratio: 1967 / 863; }
+.project__media--darkstores { aspect-ratio: 1967 / 835; }
+.project__media--bnpl { aspect-ratio: 1962 / 827; }
+.project__media--inbetween { aspect-ratio: 1962 / 827; }
 
 /* ---------- Footer (Figma 61:10482) ---------- */
 
@@ -516,7 +461,7 @@ a:focus-visible {
   position: relative;
   overflow: hidden;
   container-type: inline-size;
-  color: var(--color-ink);
+  color: #262626;   /* the slides keep the light colours they were designed in */
   font-family: "Inter", system-ui, sans-serif;
   line-height: 1.5;
   letter-spacing: normal;
