@@ -642,8 +642,10 @@ a:focus-visible {
   max-width: none;
 }
 
-/* level lines Figma turns about their centre */
+/* level lines Figma turns about their centre. They stay 0.5px thick at every width:
+   scaled with the column they drop under half a pixel, and browsers skip drawing them. */
 .mm-approach__art .mm-approach__turned {
+  height: 0.5px;
   transform: rotate(var(--turn));
 }
 
