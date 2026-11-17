@@ -611,13 +611,47 @@ a:focus-visible {
   gap: var(--leading-body);   /* one blank line between paragraphs */
 }
 
-.mm-problem {
-  margin-top: 35px;
+/* Context: the paragraph on the left (411 of the column's 1012px) and the lifecycle
+   diagram on the right (484px), tops level and the diagram on the column's right edge */
+.mm-context {
+  display: grid;
+  grid-template-columns: minmax(0, 411fr) minmax(0, 484fr);
+  column-gap: 11.56%;   /* 117 of 1012px */
+  align-items: start;
 }
 
-.mm-problem__label {
-  font-size: var(--text-sm);
-  font-weight: 400;
+.mm-diagram {
+  margin: 0;
+}
+
+.mm-diagram__link {
+  display: block;
+  cursor: zoom-in;
+}
+
+.mm-diagram img {
+  width: 100%;
+  height: auto;
+}
+
+.mm-diagram figcaption {
+  margin-top: 12px;
+}
+
+.mm-diagram .mm-link {
+  margin-top: 0;
+}
+
+/* Problem Statement, as in Figma: 24px on a 34px line, the key phrases in Bold sage
+   (4.2:1 on the panel; large text, so AA) */
+.mm-problem {
+  font-size: var(--text-md);
+  line-height: 34px;
+  letter-spacing: var(--tracking-md);
+}
+
+.mm-problem strong {
+  color: var(--color-sage);
 }
 
 /* Approach: the rings and orbit lines are placed in the text column's units, so the
@@ -687,7 +721,7 @@ a:focus-visible {
   container-type: inline-size;
   position: relative;
   aspect-ratio: 1012 / 1273.2;
-  margin-top: 50px;
+  margin-top: 20px;   /* Figma: the photos start 20px under the heading */
 }
 
 .mm-collage img {
@@ -863,6 +897,12 @@ a:focus-visible {
   .mm-features {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
+  }
+
+  /* the diagram under the paragraph, across the column */
+  .mm-context {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 28px;
   }
 
   .mm-phases {
